@@ -5,7 +5,7 @@ function Game() {};
 Game._bonus = function(previousShot, roll, rolls) {
     if (Shot.isStrike(roll) && previousShot.frame < 9) {
         return rolls[1] + rolls[2]; // Strike
-    } else if (previousShot.roll + roll === 10 && previousShot.ball === 1) {
+    } else if (previousShot.roll + roll === 10 && !previousShot.isFirstBall()) {
         return rolls[1]; // Spare
     }
     return 0;

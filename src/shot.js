@@ -8,9 +8,17 @@ Shot.isStrike = function(roll) {
     return roll === 10;
 };
 
+Shot.prototype.isFirstBall = function() {
+    return this.ball === 0;
+}
+
+Shot.prototype.isLastFrame = function() {
+    return this.frame === 10;
+}
+
 Shot.prototype.next = function(roll) {
-    if (this.ball === 0 && !Shot.isStrike(roll) ||
-        this.frame === 10 && roll === 10) {
+    if (this.isFirstBall() && !Shot.isStrike(roll) ||
+        this.isLastFrame() &&  Shot.isStrike(roll)) {
         if (this.ball > 1) {
             throw 'Too many rolls';
         }
