@@ -11,21 +11,20 @@ Game._bonus = function(previousShot, roll, rolls) {
     return 0;
 };
 
-Game._scorer = function(score, previousShot, rolls) {
+Game._scorer = function(previousShot, rolls) {
     var roll = rolls[0];
     if (roll === undefined) {
-        return score;
+        return previousShot.score;
     } else {
         var bonus = this._bonus(previousShot, roll, rolls);
-        return this._scorer(score + roll + bonus,
-                            previousShot.next(roll),
+        return this._scorer(previousShot.next(roll, bonus),
                             rolls.slice(1));
     }
 };
 
 Game.score = function() {
-    var init = new Shot(0, 0, 0);
-    return this._scorer(0, init, [].slice.call(arguments));
+    var init = new Shot(0, 0, 0, 0);
+    return this._scorer(init, [].slice.call(arguments));
 };
 
 module.exports = Game;
