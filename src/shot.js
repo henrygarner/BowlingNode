@@ -11,11 +11,11 @@ Shot.isStrike = function(roll) {
 
 Shot.prototype.isFirstBall = function() {
     return this.ball === 0;
-}
+};
 
 Shot.prototype.isLastFrame = function() {
     return this.frame === 10;
-}
+};
 
 Shot.prototype.next = function(roll, bonus) {
     var score = this.score + roll + bonus;
